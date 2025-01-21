@@ -1,0 +1,44 @@
+/*WAP for circular msg passing*/
+#include<stdio.h>
+#include<mpi.h>
+
+int main(int argc, char* argv[]) {
+    
+    MPI_Init(&argc, &argv);
+    
+    int size, rank;
+    int num;
+    char* buff[1024];
+
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    
+    if(rank==0) {
+        printf("Enter a number:\n");
+        scanf("%d", &num);
+        num++;
+        MPI_Send(&num, 1, MPI_INT, 1, 1, MPI_COMM_WORLD);
+        MPI_Recv(&num, 1, MPI_INT, size-1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("Root process recvd %d\n", num);
+    }
+    else {
+        for(int i=1; i<size-1; i++) {
+            if(rank==i) {
+                MPI_Recv(&num, 1, MPI_INT, i-1, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                printf("Process%d recvd %d\n", rank, num);
+                num++;
+                MPI_Send(&num, 1, MPI_INT, i+1, 1, MPI_COMM_WORLD);
+            }
+        }
+
+        if(rank==size-1) {
+            MPI_Recv(&num, 1, MPI_INT, size-2, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            printf("Process%d recvd %d\n", rank, num);
+            num++;
+            MPI_Send(&num, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
+        }
+    }
+
+    MPI_Finalize();
+    return 0;
+}

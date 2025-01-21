@@ -1,0 +1,1 @@
+/*wap MPI to find prime no's b'w 1 n 100 using two processes*/

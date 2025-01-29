@@ -1,4 +1,5 @@
 /*WAP for even slave to print square and odd, cube of num bsent from master's array*/
+
 #include<stdio.h>
 #include<mpi.h>
 
@@ -15,7 +16,7 @@ int main(int argc, char* argv[]) {
     
     if(rank==0) {
 
-        int arr[3] = {3,6,5};
+        int arr[8] = {3,9,5,2,8,5,6,7};
         int bsize = 3*sizeof(char) + MPI_BSEND_OVERHEAD;
         MPI_Buffer_attach(buff, bsize);
         for(int i=1; i<size; i++) {
@@ -24,11 +25,11 @@ int main(int argc, char* argv[]) {
         MPI_Buffer_detach(buff, &bsize);
     }
     
-    for(int i=1; i<size; i++) {
+    for(int i=size-1; i>0; i--) {
         if(rank==i) {
             MPI_Recv(&num, 1, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            if(i%2==0) printf("%d : %d\n", num, num*num);
-            else printf("%d : %d\n", num, num*num*num);
+            if(i%2==0) printf("%d:\t%d - %d\n",rank, num, num*num);
+            else printf("%d:\t%d - %d\n",rank, num, num*num*num);
         }
     }
     

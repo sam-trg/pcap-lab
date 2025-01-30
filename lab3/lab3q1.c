@@ -1,0 +1,6 @@
+/*Write MPI program to read N values in an array in the root process. 
+Distribute these N values among N processes.
+Each process finds the square of the value it receives. 
+Let every process return these values to the root and 
+root process gathers and prints the result.
+Use collective communication routines*/

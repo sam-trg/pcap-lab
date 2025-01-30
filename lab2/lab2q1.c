@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
         MPI_Recv(&word, length, MPI_CHAR, 1, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         printf("%d:\t%s\n", rank, word);
     }
-    else {
+    else if(rank==1){
         MPI_Recv(&word, 1024, MPI_CHAR, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         int i=0;
         while(word[i]!='\0'){
@@ -34,6 +34,5 @@ int main(int argc, char* argv[]) {
     }
 
     MPI_Finalize();
-
     return 0;
 }

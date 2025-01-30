@@ -1,4 +1,5 @@
 /*WAP for each slave to print num recvd from master*/
+
 #include<stdio.h>
 #include<mpi.h>
 
@@ -24,13 +25,11 @@ int main(int argc, char* argv[]) {
         printf("All messages sent successfully.\n");    
     }
     
-    for(int i=size-1; i>0; i--) {
-        if(rank==i) {
-            MPI_Recv(&num, 1, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            printf("%d:\t Received %d\n", rank, num);
-        }
+    else {
+        MPI_Recv(&num, 1, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("%d:\t Received %d\n", rank, num);
     }
-    
+
     MPI_Finalize();
     return 0;
 }

@@ -3,9 +3,11 @@
 #include <mpi.h>
 #include <string.h>
 
+# define MAX_LEN 1024
+
 int main(int argc, char* argv[]) {
     int rank;
-    char word[1024];
+    char word[MAX_LEN];
 
     MPI_Init(&argc, &argv);
 

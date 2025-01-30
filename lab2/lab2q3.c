@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<mpi.h>
+#include<stdlib.h>
 
 int main(int argc, char* argv[]) {
     int size, rank;
@@ -10,23 +11,32 @@ int main(int argc, char* argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     int num;
-    char* buf[1024];
     
     if(rank==0) {
-        int arr[8] = {3,9,5,2,8,5,6,7};
-        int bsize = 8*sizeof(int) + MPI_BSEND_OVERHEAD;
-        MPI_Buffer_attach(buf, bsize);
+
+        // accept array of nums to be sent
+        int* arr = (int*)malloc(size*sizeof(int));
+        printf("Enter %d elements:\n", size);
+        for(int i=0; i<size; i++){
+            scanf("%d", arr+i);
+        }
+
+        // init buffer
+        int bsize = size*sizeof(int) + MPI_BSEND_OVERHEAD;
+        void* b = malloc(bsize);
+
+        //bsend
+        MPI_Buffer_attach(b, bsize);
         for(int i=1; i<size; i++) {
             MPI_Bsend(arr+i-1, 1, MPI_INT, i, 1, MPI_COMM_WORLD);
         }
-        MPI_Buffer_detach(buf, &bsize);
+        MPI_Buffer_detach(b, &bsize);
     }
 
     else {
-        
         MPI_Recv(&num, 1, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        if(rank%2==0) printf("%d:\t%d - %d\n",rank, num, num*num);
-        else printf("%d:\t%d - %d\n",rank, num, num*num*num);
+        if(rank%2==0) printf("P%d:\t%d - %d\n",rank, num, num*num);
+        else printf("P%d:\t%d - %d\n",rank, num, num*num*num);
     }
 
     MPI_Finalize();

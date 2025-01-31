@@ -1,5 +1,4 @@
-/*WAP for even slave to print square and odd,
-	cube of num bsent from master's array*/
+// WAP for even slave to print square and odd, cube of num bsent from master's array
 
 #include <mpi.h>
 #include <stdio.h>

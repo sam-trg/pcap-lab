@@ -1,4 +1,4 @@
-/*WAP for each slave to print num recvd from master*/
+// WAP for each slave to print num recvd from master
 
 #include <mpi.h>
 #include <stdio.h>

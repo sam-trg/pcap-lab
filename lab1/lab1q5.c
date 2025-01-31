@@ -1,4 +1,4 @@
-/*WAP where even ranked process prints factorial and odd fibonacci*/
+// WAP where even ranked process prints factorial and odd fibonacci
 
 #include <mpi.h>
 #include <stdio.h>

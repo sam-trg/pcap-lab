@@ -1,4 +1,4 @@
-/*WAP for circular msg passing*/
+// WAP for circular msg passing
 
 #include <mpi.h>
 #include <stdio.h>

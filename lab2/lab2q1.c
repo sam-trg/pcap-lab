@@ -1,4 +1,5 @@
-/* WAP to send a word and recv its togggled form */
+// WAP to send a word and recv its togggled form
+
 #include <mpi.h>
 #include <stdio.h>
 #include <string.h>

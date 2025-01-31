@@ -1,4 +1,4 @@
-/*WAP for each process to do different arithmetic operation*/
+// WAP for each process to do different arithmetic operation
 
 #include <mpi.h>
 #include <stdio.h>

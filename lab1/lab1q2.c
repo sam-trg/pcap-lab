@@ -1,4 +1,4 @@
-/*WAP for even process to say hello and odd to say world*/
+// WAP for even process to say hello and odd to say world
 
 #include <mpi.h>
 #include <stdio.h>

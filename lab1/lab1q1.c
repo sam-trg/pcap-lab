@@ -1,4 +1,4 @@
-/*WAP to print pow(x,rank) for each process*/
+// WAP to print pow(x,rank) for each process
 
 #include <math.h>
 #include <mpi.h>

@@ -32,9 +32,10 @@ int	main(int argc, char *argv[])
 		MPI_Buffer_attach(b, bsize);
 		for (int i = 1; i < size; i++)
 		{
-			MPI_Bsend(arr + i - 1, 1, MPI_INT, i, 1, MPI_COMM_WORLD);
+			MPI_Bsend(arr + i, 1, MPI_INT, i, 1, MPI_COMM_WORLD);
 		}
 		MPI_Buffer_detach(b, &bsize);
+		free(b);
 	}
 
 	else
@@ -46,7 +47,7 @@ int	main(int argc, char *argv[])
 			printf("P%d:\t%d - %d\n", rank, num, num * num * num);
 	}
 
+	free(arr);
 	MPI_Finalize();
-
 	return (0);
 }

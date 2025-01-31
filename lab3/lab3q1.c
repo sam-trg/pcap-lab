@@ -4,3 +4,7 @@ Each process finds the square of the value it receives.
 Let every process return these values to the root and 
 root process gathers and prints the result.
 Use collective communication routines*/
+
+MPI_Bcast()
+MPI_Gather()
+MPI_Scatter()

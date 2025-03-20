@@ -24,7 +24,7 @@ int	main(int argc, char *argv[])
             exit(0);
 		}
 	}
-
+	MPI_Bcast(&N, 1, MPI_INT, 0, MPI_COMM_WORLD);
 	if (rank < N) {
         printf("%d\n", rank);
         if (rank % 2 == 0) {
